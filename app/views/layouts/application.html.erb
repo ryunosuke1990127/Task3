@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!--全画面に設定に適用されているヘッダー部分の作成-->
+    <header>
+      <%if user_signed_in? %>
+         <li>
+          <%= link_to "Home"%>
+        </li>
+
+        <li>
+          <%= link_to "Log Out", destroy_user_session_path, method: :delete%>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to "Home", root_path %>
+        </li>
+
+        <li>
+          <%= link_to "About", destroy_user_session_path, method: :delete%>
+        </li>
+
+        <li>
+          <%= link_to "Sign up", new_user_registration_path%>
+        </li>
+        <li>
+          <%= link_to "Login", user_session_path %>
+        </li>
+        <% end %>
+    </header>
+    <%= yield %>
+  </body>
+</html>

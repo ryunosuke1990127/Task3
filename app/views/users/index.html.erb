@@ -16,11 +16,11 @@
 <%=f.submit 'Create Book'%>
 <% end %>
 
-
-<!--投稿しているユーザー本一覧を表示-->
-<h4>Books</h4>
-<% @books.each do | book |%>
+<!--そのユーザーが登録した本情報の表示-->
+<h4>Book details</h4>
+<% @user_book.each do | book |%>
 <div>
+  <p>ユーザープロフィール</p>
   <p>Title:
   <%= link_to book_path(book.id) do %><%= book.title %>
   <% end %></p>

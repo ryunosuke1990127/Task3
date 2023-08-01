@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   # ログイン後はユーザーの詳細画面へ
   def after_sign_in_path_for(resource)
-    books_path
+    users_path
   end
 
   # ログアウト後はTopページへ
@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
 end

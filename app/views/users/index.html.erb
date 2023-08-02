@@ -1,4 +1,4 @@
-<h1>Books#index</h1>
+<h1>Books#index(ログインユーザー用)</h1>
 <!--ログインしているユーザーの情報取得-->
 <h1>User info<h1>
 <%= @user.name%>
@@ -17,7 +17,7 @@
 <% end %>
 
 <!--そのユーザーが登録した本情報の表示-->
-<h4>Book details</h4>
+<h4>Books</h4>
 <% @user_book.each do | book |%>
 <div>
   <p>ユーザープロフィール</p>

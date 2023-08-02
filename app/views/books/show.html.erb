@@ -2,3 +2,5 @@
 <p><%= @book.title %></p>
 <p><%= @book.body %></p>
 <p><%= @book.user.name %></p>
+<p><%= link_to "Edit",edit_book_path(@book.id) %></p>
+<p><%= link_to "Destroy",book_path(@book.id), method: :DELETE %></p>

@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, except: [:top]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # ログイン後はユーザーの詳細画面へ
   def after_sign_in_path_for(resource)
-    users_path
+    user_path(@user.id)
   end
 
   # ログアウト後はTopページへ

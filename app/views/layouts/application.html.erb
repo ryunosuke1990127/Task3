@@ -13,23 +13,21 @@
   <body>
     <!--全画面に設定に適用されているヘッダー部分の作成-->
     <header>
-      <%if user_signed_in? %>
+      <% if user_signed_in? %>
       <!--サインインしている時のヘッダー表示-->
          <li>
           <%= link_to "Home", root_path%>
         </li>
-
         <li>
           <%= link_to "Users",users_path %>
         </li>
-
         <li>
           <%= link_to " Books",books_path %>
         </li>
-
         <li>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete%>
         </li>
+        
         <% else %>
         <!--サインインしていない時のヘッダー表示-->
         <li>

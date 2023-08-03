@@ -18,7 +18,12 @@ class BooksController < ApplicationController
 
   # book一覧内の本情報がクリックされた際の処理
   def show
-    @book = Book.find(params[:id])
+    # 現在ログインしているユーザー情報を取得
+    @user = current_user
+    # Veiw側でBookモデルの情報を扱うためからのインスタンスをセット
+    @book = Book.new
+    # 詳細をクリックした際の情報
+    @books = Book.find(params[:id])
   end
 
   # Book詳細画面にて編集ボタンをクリックした際の画面遷移

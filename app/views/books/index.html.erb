@@ -3,7 +3,7 @@
 <h1>User info<h1>
 <%= @user.name%>
 <%= @user.introduction %>
-<%= image_tag @user.get_profile_image %>
+<%= image_tag @user.get_profile_image(100,100) %>
 <p><%= link_to "ユーザー編集",edit_user_path(@user.id)%></p>
 
 <!--投稿用のフォーム作成-->
@@ -21,6 +21,7 @@
 <h4>Books</h4>
 <% @books.each do | book |%>
 <div>
+  <%= image_tag book.user.get_profile_image(100,100) %>
   <p>Title:
   <%= link_to book_path(book.id) do %><%= book.title %>
   <% end %></p>

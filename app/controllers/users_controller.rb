@@ -1,16 +1,20 @@
 class UsersController < ApplicationController
    def index
+    # 現在ログインしているUserInfoを取得
+    @user = current_user
     # ユーザーページ内のcreateアクションを実行する時用のBookインスタンスをセット
      @book = Book.new
-    # 現在ログインしているユーザー情報を取得
-     @user = current_user
-     @user_book = @user.books
+    # Bookersを利用しているユーザー一覧を取得
+    @users = User.all
    end
 
   def show
+    # ユーザーページ内のcreateアクションを実行する時用のBookインスタンスをセット
+     @book = Book.new
     #ログインしているユーザーの情報を取得
     @user = User.find(params[:id])
-    @book = @user.book
+    # ユーザーの情報を取得
+    @user_book = @user.books
   end
 
  # ユーザーの編集ページをクリックした際の機能
@@ -30,7 +34,6 @@ class UsersController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     @book.save
-    byebug
     redirect_to book_path(@book.id)
   end
 

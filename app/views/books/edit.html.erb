@@ -1,5 +1,13 @@
 <h1>Editing Book</h1>
-<%= form_with model: @book_edit do |f| %>
+<% if @books.errors.any? %>
+  <%= @books.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @books.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: @books do |f| %>
 <p>Title</p>
 <%= f.text_field :title%>
 <p>Option</p>

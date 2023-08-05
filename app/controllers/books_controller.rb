@@ -1,10 +1,22 @@
 class BooksController < ApplicationController
+  # ログインしていないユーザが編集使用とした時の判定
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   # Create Bookを押した際の処理
   def create
     @book = Book.new(book_params)
+    # ログインしているユーザーを紐づける
     @book.user_id = current_user.id
-    @book.save
+    if @book.save
+    flash[:notice] = "You have updated user successfully."
     redirect_to book_path(@book.id)
+    else
+      # エラーが発生した際のrender先のView設定用のインスタンスをセット
+      @user = current_user
+      @books = Book.all
+      # エラー時は一覧ページへ
+      render :index
+    end
   end
 
   def index
@@ -28,14 +40,18 @@ class BooksController < ApplicationController
 
   # Book詳細画面にて編集ボタンをクリックした際の画面遷移
   def edit
-    @book_edit = Book.find(params[:id])
+    @books = Book.find(params[:id])
   end
 
-  # Book詳細画面にてupdatをクリックした際の処理
+  # Book詳細画面にてupdateをクリックした際の処理
   def update
     @books = Book.find(params[:id])
-    @books.update(book_params)
+    if @books.update(book_params)
+    flash[:notice] = "You have updated book successfully."
     redirect_to book_path
+    else
+      render:edit
+    end
   end
 
   # Book詳細画面にてDESTROYをクリックした際の処理
@@ -49,5 +65,12 @@ class BooksController < ApplicationController
   private
    def book_params
      params.require(:book).permit(:title,:body)
+   end
+
+   def is_matching_login_user
+     @books = Book.find(params[:id])
+    unless @books.user.id==current_user.id
+       redirect_to books_path
+    end
    end
 end

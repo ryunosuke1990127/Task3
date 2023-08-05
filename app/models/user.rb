@@ -5,9 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :profile_image
-
   # Bookテーブルと1:Nの関係になるようアソシエーションを定義
   has_many :books, dependent: :destroy
+
+  # バリデーションの設定
+  validates :name, presence: true
 
   # モデル側でメソッドを定義しView側で呼び出しが可能なようにする
   def get_profile_image(width,height)

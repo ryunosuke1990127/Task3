@@ -1,0 +1,17 @@
+<!--部分テンプレートの-->
+<!--ログインしているユーザーの情報取得-->
+<h1>User info<h1>
+<%= @user.name%>
+<%= @user.introduction %>
+<%= image_tag @user.get_profile_image(100,100) %>
+<p><%= link_to "ユーザー編集",edit_user_path(@user.id)%></p>
+
+<!--投稿用のフォーム作成-->
+<h1>New Book</h1>
+<%= form_with model: @book do |f|%>
+<h4>Title</h4>
+<%=f.text_field :title %>
+<h4>Option</h4>
+<%=f.text_area :body %>
+<%=f.submit 'Create Book'%>
+<% end %>

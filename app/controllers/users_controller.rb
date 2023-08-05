@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    # ログインしていないユーザが編集使用とした時の判定
+    before_action :is_matching_login_user, only: [:edit, :update]
    def index
     # 現在ログインしているUserInfoを取得
     @user = current_user
@@ -20,13 +22,21 @@ class UsersController < ApplicationController
  # ユーザーの編集ページをクリックした際の機能
   def edit
      @user = User.find(params[:id])
+      # ログインしているユーザー以外が編集ボタンをクリックした際の処理
+     unless @user.id==current_user.id
+       redirect_to books_path
+     end
   end
 
   # ユーザーの編集画面にて更新を押した際の処理
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to users_path
+    if  @user.update(user_params)
+    flash[:notice] = "You have updated user successfully."
+    redirect_to user_path(@user.id)
+    else
+      render :edit
+    end
   end
 
   # ログインしたユーザーページから新しい本を投稿するためのCreateアクションを定義
@@ -46,6 +56,13 @@ class UsersController < ApplicationController
   #　本をCreateする際のストロングパラメータの設定
   def book_params
      params.require(:book).permit(:title,:body)
+  end
+
+  def is_matching_login_user
+    @user = User.find(params[:id])
+    unless @user.id==current_user.id
+       redirect_to books_path
+    end
   end
 
 end

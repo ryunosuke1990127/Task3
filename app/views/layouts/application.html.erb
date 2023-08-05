@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+<script src="https://kit.fontawesome.com/0ea1809b33.js" crossorigin="anonymous"></script>
 <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <!--全画面に設定に適用されているヘッダー部分の作成-->
-    <header>
+    <header　class = "shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class "container">
+          <a class="navbar-brand p-3" href="/">Bookers</a>
       <% if user_signed_in? %>
       <!--サインインしている時のヘッダー表示-->
          <li>
@@ -27,7 +30,7 @@
         <li>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete%>
         </li>
-        
+
         <% else %>
         <!--サインインしていない時のヘッダー表示-->
         <li>
@@ -35,7 +38,7 @@
         </li>
 
         <li>
-          <%= link_to "About", destroy_user_session_path, method: :delete%>
+          <%= link_to "About", about_path%>
         </li>
 
         <li>
@@ -45,6 +48,7 @@
           <%= link_to "Login", user_session_path %>
         </li>
         <% end %>
+      </nav>
     </header>
     <%= yield %>
   </body>

@@ -1,12 +1,44 @@
-<h1>Books#index(ログインユーザー用)</h1>
-<%= flash[:notice] %>
-<!--部分テンプレートの呼び出し-->
-<%= render 'user', book: @book %>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  </head>
+<body>
+<main>
+  <%= flash[:notice] %>
+  <div class="container">
+       <div class="row">
+        <div class="col-md-3">
+                <!--部分テンプレートの呼び出し-->
+                <%= render 'user', book: @book %>
+        </div>
 
-<!--そのユーザーが登録した本情報の表示-->
-<h4>Users</h4>
-<% @users.each do |users | %>
-<p><%= image_tag users.get_profile_image(100,100) %><p>
-<p>name<%= users.name %></p>
-<%= link_to "show",user_path(users.id)%>
-<% end %>
+        <div class="col-md-8 offset-md-1">
+                <!--そのユーザーが登録した本情報の表示-->
+                <h4>Users</h4>
+                <table class ="table">
+                  <!--ヘッダー設定-->
+                  <th>
+                    <tr>
+                      <th>image</th>
+                      <th>name</th>
+                      <th></th>
+                    </tr>
+                  </th>
+                <% @users.each do |users | %>
+                <td>
+                  <tr>
+                    <td><%= image_tag users.get_profile_image(100,100) %></td>
+                    <td><%= users.name %></td>
+                    <td><%= link_to "show",user_path(users.id)%></td>
+                    <% end %>
+                  </tr>
+                </td>
+              </table>
+          </div>
+        </div>
+     </div>
+   </main>
+ </body>
+</html>

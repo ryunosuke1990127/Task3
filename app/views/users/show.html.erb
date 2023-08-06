@@ -1,17 +1,46 @@
-<h1>Books(ログインユーザー用)</h1>
-<%= flash[:notice] %>
-<%= flash[:notice1] %>
-<!--部分テンプレートの呼び出し-->
-<%= render 'user', book: @book %>
-
-<!--そのユーザーが登録した本情報の表示-->
-<h4>Books</h4>
-<% @user_book.each do | book |%>
-<div>
-  <p><%=image_tag book.user.get_profile_image(100,100)%></p>
-  <p>Title:
-  <%= link_to book_path(book.id) do %><%= book.title %>
-  <% end %></p>
-  <p>Option:<%= book.body %></p>
-</div>
-<% end %>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+  </head>
+<body>
+  <main>
+    <%= flash[:notice] %>
+      <div class="container">
+       <div class="row">
+        <div class="col-md-3">
+              <!--部分テンプレートの呼び出し-->
+              <%= render 'user', book: @book %>
+        </div>
+        <div class="col-md-8 offset-md-1">
+              <!--そのユーザーが登録した本情報の表示-->
+              <h4>Books</h4>
+              <table class="table">
+                <!--テーブルのヘッダー部分-->
+                <th>
+                  <tr>
+                    <!--空白設定-->
+                      <th></th>
+                    <!--Title欄-->
+                      <th>Title</th>
+                    <!--Opinion欄-->
+                      <th>Opnion</th>
+                  </tr>
+                </th>
+              <% @user_book.each do | book |%>
+              <td>
+                <tr>
+                <td><%=image_tag book.user.get_profile_image(100,100)%></td>
+                <td><%= link_to book_path(book.id) do %><%= book.title %><% end %></td>
+                <td>Option:<%= book.body %></td>
+                </tr>
+              </td>
+              <% end %>
+          </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

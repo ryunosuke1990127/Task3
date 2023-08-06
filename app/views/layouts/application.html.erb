@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-<script src="https://kit.fontawesome.com/0ea1809b33.js" crossorigin="anonymous"></script>
-<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/0ea1809b33.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Bookers2</title>
   </head>
 
   <body>
     <!--全画面に設定に適用されているヘッダー部分の作成-->
     <header　class = "shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <div class "container">
-          <a class="navbar-brand p-3" href="/">Bookers</a>
-      <% if user_signed_in? %>
-      <!--サインインしている時のヘッダー表示-->
-         <li>
-          <%= link_to "Home", root_path%>
-        </li>
-        <li>
-          <%= link_to "Users",users_path %>
-        </li>
-        <li>
-          <%= link_to " Books",books_path %>
-        </li>
-        <li>
-          <%= link_to "Log Out", destroy_user_session_path, method: :delete%>
-        </li>
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><font color="white">Bookers</font></a>
+            <div class = "collapse navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav ml-auto">
+               <% if user_signed_in? %>
+                <!--サインインしている時のヘッダー表示-->
+                <li class="nav-item">
+                  <a href="/"><i class="far fa-home"></i><font color="white">Home</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href="/users" data-method="get"><i class="far fa-home"></i><font color="white">Users</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href="/books" data-method="get"><i class="far fa-home"></i><font color="white">Books</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href=" /users/sign_out" data-method="delete"><i class="far fa-home"></i><font color="white">Log Out</font></a>
+                </li>
 
-        <% else %>
-        <!--サインインしていない時のヘッダー表示-->
-        <li>
-          <%= link_to "Home", root_path %>
-        </li>
-
-        <li>
-          <%= link_to "About", about_path%>
-        </li>
-
-        <li>
-          <%= link_to "Sign up", new_user_registration_path%>
-        </li>
-        <li>
-          <%= link_to "Login", user_session_path %>
-        </li>
-        <% end %>
-      </nav>
+                <% else %>
+                <!--サインインしていない時のヘッダー表示-->
+                <li class="nav-item">
+                  <a href="/"><i class="far fa-home"></i><font color="white">Home</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href="/about"><i class="far fa-home"></i><font color="white">About</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href="/users/sign_up"><i class="far fa-home"></i><font color="white">Sign up</font></a>
+                </li>
+                <li class="nav-item">
+                  <a href="/users/sign_in"><i class="far fa-home"></i><font color="white">Log in</font></a>
+                </li>
+                <% end %>
+             </ul>
+          </div>
+        </div>
+       </nav>
     </header>
     <%= yield %>
   </body>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,11 +8,43 @@
 <body>
   <main>
     <%= flash[:notice] %>
-      <div class="container">
-       <div class="row">
-        <div class="col-md-3">
-              <!--部分テンプレートの呼び出し-->
-              <%= render 'user', book: @book %>
+        <div class= "container">
+          <div class="row">
+            <div class="col-md-3">
+                      <h1>User info<h1>
+                      <%= image_tag @user.get_profile_image(100,100) %>
+                      <table class="table">
+                        <td>
+                          <!--表内の空白設定-->
+                          <tr></tr>
+                          <!--ユーザー名-->
+                          <tr>
+                          <th class="name">name</th>
+                          <th class="name"><%= @user.name%></th>
+                       　  </tr>
+                       　<!--自己紹介欄-->
+                       　<tr>
+                       　  <th class="name">introduction</th>
+                       　  <th class="name"><%= @user.introduction %></th>
+                       　</tr>
+                        </td>
+                      </table>
+                      <!--ログインしているユーザーか否かで画面を遷移-->
+                      <%if @user.id==current_user.id %>
+                      <%=link_to edit_user_path(current_user.id),class:"btn btn-outline-secondary btn-block" do %>
+                        <i class="fa-solid fa-user-cog fas fa-user-cog"></i>
+                        <% end %>
+                      <% else %>
+                      <%end%>
+              <!--投稿用のフォーム作成-->
+                      <h1>New book</h1>
+                      <%= form_with model: @book do |f|%>
+                      <h4>Title</h4>
+                      <%= f.text_field :title %>
+                      <h4>Option</h4>
+                      <%= f.text_area :body %>
+                      <%= f.submit 'Create Book'%>
+              <% end %>
         </div>
         <div class="col-md-8 offset-md-1">
               <!--そのユーザーが登録した本情報の表示-->
@@ -40,7 +73,6 @@
           </div>
           </div>
         </div>
-      </div>
     </main>
   </body>
 </html>

@@ -21,7 +21,8 @@
                <% if user_signed_in? %>
                 <!--サインインしている時のヘッダー表示-->
                 <li class="nav-item">
-                  <a href="/"><i class="fa-solid fa-house-chimney"></i><font color="white">Home</font></a>
+                  <i class="fa-solid fa-home fas fa-home" style="color: #4cd4e6;"></i>
+                    <%= link_to "Home" ,user_path(current_user),class:"link" %>
                 </li>
                 <li class="nav-item">
                   <a href="/users" data-method="get"><i class="fa-solid fa-users"></i><font color="white">Users</font></a>
@@ -30,22 +31,21 @@
                   <a href="/books" data-method="get"><i class="fa-solid fa-book-open"></i><font color="white">Books</font></a>
                 </li>
                 <li class="nav-item">
-                  <a href=" /users/sign_out" data-method="delete"><i class="fa-solid fa-right-from-bracket"></i><font color="white">Log Out</font></a>
+                  <a href="/users/sign_out" data-method="delete"><i class="fas fa-sign-out-alt"></i><font color="white">Log out</font></a>
                 </li>
-
                 <% else %>
                 <!--サインインしていない時のヘッダー表示-->
                 <li class="nav-item">
-                  <a href="/"><i class="fa-solid fa-house-chimney"></i><font color="white">Home</font></a>
+                  <a href="/"><i class="fa-solid fa-home fas fa-home"></i><font color="white">Home</font></a>
                 </li>
                 <li class="nav-item">
-                  <a href="/about"><i class="fa-solid fa-paperclip"></i><font color="white">About</font></a>
+                  <a href="/home/about"><i class="fa-solid fa-link"></i><font color="white">About</font></a>
                 </li>
                 <li class="nav-item">
-                  <a href="/users/sign_up"><i class="fa-solid fa-user-plus"></i><font color="white">Sign up</font></a>
+                  <a  href="/users/sign_up"><i class="fa-solid fa-user-plus"></i><font color="white">Sign up</font></a>
                 </li>
                 <li class="nav-item">
-                  <a href="/users/sign_in"><i class="fa-solid fa-right-to-bracket"></i><font color="white">Log in</font></a>
+                  <a href="/users/sign_in"><i class="fas fa-sign-in-alt"></i><font color="white">Log in</font></a>
                 </li>
                 <% end %>
              </ul>

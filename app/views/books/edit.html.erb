@@ -11,7 +11,7 @@
           <div class="mx-auto">
           <h1>Editing Book</h1>
           <% if @books.errors.any? %>
-            <%= @books.errors.count %>件のエラーが発生しました
+            <%= @books.errors.count %>error prohibited this obj from being saved:
             <ul>
               <% @books.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
@@ -25,7 +25,7 @@
           <%= f.text_area :body%>
           <p><%= f.submit "Update Book"%></p>
           <% end %>
-          <p><%= link_to "show",user_path(@books.user.id)%> | <%= link_to "Back",books_path%>
+          <p><%= link_to "Show",book_path(@books.id)%> | <%= link_to "Back",books_path%>
       </div>
     </div>
   </div>

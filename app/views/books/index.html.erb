@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
   </head>
 <body>
-<main>
+    <main>
         <% if @book.errors.any? %>
           <%= @book.errors.count %>件のエラーが発生しました
           <ul>
@@ -42,7 +42,7 @@
             <tr>
               <td><a href="/users/<%=book.user.id%>"><%= image_tag book.user.get_profile_image(100,100) %></a></td>
               <td><%= link_to book_path(book.id) do %><%= book.title %><% end %></td>
-              <td>Option:<%= book.body %></td>
+              <td><%= book.body %></td>
             <% end %>
             </tr>
           </td>

@@ -10,13 +10,46 @@
 <main>
    <%= flash[:notice] %>
    <div class="container">
-       <div class="row">
+          <div class="row">
+            <div class="col-md-3">
+                      <h1>User info<h1>
+                      <%= image_tag @books.user.get_profile_image(100,100) %>
+                      <table class="table">
+                        <td>
+                          <!--表内の空白設定-->
+                          <tr></tr>
+                          <!--ユーザー名-->
+                          <tr>
+                          <th class="name">name</th>
+                          <th class="name"><%= @books.user.name%></th>
+                       　  </tr>
+                       　<!--自己紹介欄-->
+                       　<tr>
+                       　  <th class="name">introduction</th>
+                       　  <th class="name"><%= @books.user.introduction %></th>
+                       　</tr>
+                        </td>
+                      </table>
+                      <!--ログインしているユーザーか否かで画面を遷移-->
+                      <%if @books.user_id==current_user.id %>
+                      <!--ログインしているユーザーと同じなら編集権限を与える-->
+                      <%=link_to edit_user_path(current_user.id),class:"btn btn-outline-secondary btn-block" do %>
+                        <i class="fa-solid fa-user-cog fas fa-user-cog"></i>
+                        <% end %>
+                      <% else %>
+                      <!--ログインしているユーザーと違うなら編集権限を与えずログインしているユーザーの詳細ページへ-->
+                      <%end%>
+              <!--投稿用のフォーム作成-->
 
-        <div class="col-md-3">
-          <!--部分テンプレートで呼び出し-->
-            <%= render 'book', book: @book %>
-        </div>
-
+                      <h1>New book</h1>
+                      <%= form_with model: @book do |f|%>
+                      <h4>Title</h4>
+                      <%= f.text_field :title %>
+                      <h4>Option</h4>
+                      <%= f.text_area :body %>
+                      <%= f.submit 'Create Book'%>
+              <% end %>
+          </div>
         <div class="col-md-8 offset-md-1">
             <h1>Book details</h1>
             <!--その本の編集-->
@@ -24,10 +57,10 @@
               <!--テーブル設定-->
               <td>
                 <tr>
-                  <td><%= image_tag @books.user.get_profile_image(100,100)  %> <br>
-                      <%= link_to "#{@books.user.name}", books_path %>
+                  <td><a href="/users/<%=@books.user.id%>"><%= image_tag @books.user.get_profile_image(100,100) %></a><br>
+                      <%= link_to "#{@books.user.name}", user_path(@books.user.id) %>
                   </td>
-                  <td><%= link_to "#{@books.user.name}", book_path %></td>
+                  <td><a href="/books/<%=@books.id%>"><%=@books.title%></a></td>
                   <td><%= @books.body %></td>
                       <!--以下編集ボタンはログインしているユーザーのみにしか表示しない-->
                       <% if @books.user== current_user %>
@@ -36,7 +69,10 @@
                       <% end %>
                 </tr>
               </td>
-            <table>
-      </main>
+            </table>
+        </div>
+      </div>
+     </div>
+    </main>
   </body>
 </html>

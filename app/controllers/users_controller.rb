@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     # ログインしていないユーザが編集使用とした時の判定
-    before_action :is_matching_login_user, only: [:edit, :update]
+    before_action :is_matching_login_user, only: [:update]
    def index
     # 現在ログインしているUserInfoを取得
     @user = current_user
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
       # ログインしているユーザー以外が編集ボタンをクリックした際の処理
      unless @user.id==current_user.id
-       redirect_to books_path
+       redirect_to user_path(current_user.id)
      end
   end
 

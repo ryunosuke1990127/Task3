@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
   </head>
 <body>
 <main>
@@ -19,22 +20,22 @@
                 <h4>Users</h4>
                 <table class ="table">
                   <!--ヘッダー設定-->
-                  <th>
+                  <thead>
                     <tr>
                       <th>image</th>
                       <th>name</th>
                       <th></th>
                     </tr>
-                  </th>
+                  </thead>
                 <% @users.each do |users | %>
-                <td>
+                <tbody>
                   <tr>
                     <td><%= image_tag users.get_profile_image(100,100) %></td>
                     <td><%= users.name %></td>
                     <td><%= link_to "Show",user_path(users.id)%></td>
                     <% end %>
                   </tr>
-                </td>
+                </tbody>
               </table>
           </div>
         </div>

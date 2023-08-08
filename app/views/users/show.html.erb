@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="stylesheet" href="users.scss"/>
   </head>
 <body>
   <main>
@@ -11,68 +12,37 @@
         <div class= "container">
           <div class="row">
             <div class="col-md-3">
-                      <h1>User info<h1>
-                      <%= image_tag @user.get_profile_image(100,100) %>
-                      <table class="table">
-                        <td>
-                          <!--表内の空白設定-->
-                          <tr></tr>
-                          <!--ユーザー名-->
-                          <tr>
-                          <th class="name">name</th>
-                          <th class="name"><%= @user.name%></th>
-                       　  </tr>
-                       　<!--自己紹介欄-->
-                       　<tr>
-                       　  <th class="name">introduction</th>
-                       　  <th class="name"><%= @user.introduction %></th>
-                       　</tr>
-                        </td>
-                      </table>
-                      <!--ログインしているユーザーか否かで画面を遷移-->
-                      <%if @user.id==current_user.id %>
-                      <%=link_to edit_user_path(current_user.id),class:"btn btn-outline-secondary btn-block" do %>
-                        <i class="fa-solid fa-user-cog fas fa-user-cog"></i>
-                        <% end %>
-                      <% else %>
-                      <%end%>
-              <!--投稿用のフォーム作成-->
-                      <h1>New book</h1>
-                      <%= form_with model: @book do |f|%>
-                      <h4>Title</h4>
-                      <%= f.text_field :title %>
-                      <h4>Option</h4>
-                      <%= f.text_area :body %>
-                      <%= f.submit 'Create Book'%>
-              <% end %>
-        </div>
+              <!--部分テンプレートの呼び出し-->
+              <%= render 'user' %>
+            </div>
         <div class="col-md-8 offset-md-1">
               <!--そのユーザーが登録した本情報の表示-->
               <h4>Books</h4>
               <table class="table">
                 <!--テーブルのヘッダー部分-->
-                <th>
+                <thead>
                   <tr>
                     <!--空白設定-->
-                      <th></th>
+                    <th></th>
                     <!--Title欄-->
-                      <th>Title</th>
+                    <th>Title</th>
                     <!--Opinion欄-->
-                      <th>Opnion</th>
+                    <th>Opnion</th>
                   </tr>
-                </th>
+                </thead>
               <% @user_book.each do | book |%>
-              <td>
+              <tbody>
                 <tr>
-                <td><%=image_tag book.user.get_profile_image(100,100)%></td>
+                <td><a href="/users/<%=book.user.id%>"><%= image_tag book.user.get_profile_image(100,100) %></a></td>
                 <td><%= link_to book_path(book.id) do %><%= book.title %><% end %></td>
-                <td>Option:<%= book.body %></td>
+                <td><%= book.body %></td>
+                <% end %>
                 </tr>
-              </td>
-              <% end %>
-          </div>
+              </tbody>
+            </table>
           </div>
         </div>
+      </div>
     </main>
   </body>
 </html>
